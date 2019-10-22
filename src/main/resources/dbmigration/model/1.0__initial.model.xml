@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<migration xmlns="http://ebean-orm.github.io/xml/ns/dbmigration">
+    <changeSet type="apply">
+        <createTable name="account" identityType="external" pkName="pk_account">
+            <column name="gid" type="varchar(32)" primaryKey="true" identity="true"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="balance" type="decimal(65,2)"/>
+            <column name="idcard" type="varchar(18)"/>
+            <column name="cardno" type="varchar(50)"/>
+            <column name="create_at" type="timestamp" notnull="true"/>
+            <column name="create_by" type="varchar(50)" notnull="true"/>
+            <column name="modify_at" type="timestamp" notnull="true"/>
+            <column name="modify_by" type="varchar(50)" notnull="true"/>
+        </createTable>
+        <createTable name="trans_record" identityType="external" pkName="pk_trans_record">
+            <column name="gid" type="varchar(32)" primaryKey="true" identity="true"/>
+            <column name="trade_no" type="varchar(50)"/>
+            <column name="source_gid" type="varchar(32)"/>
+            <column name="target_gid" type="varchar(32)"/>
+            <column name="amount" type="decimal(65,2)"/>
+            <column name="status" type="integer(10)" checkConstraint="check ( status in (0,1))" checkConstraintName="ck_trans_record_status"/>
+            <column name="remark" type="varchar(50)"/>
+            <column name="create_at" type="timestamp" notnull="true"/>
+            <column name="create_by" type="varchar(50)" notnull="true"/>
+            <column name="modify_at" type="timestamp" notnull="true"/>
+            <column name="modify_by" type="varchar(50)" notnull="true"/>
+        </createTable>
+    </changeSet>
+</migration>

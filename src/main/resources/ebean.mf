@@ -1,0 +1,3 @@
+entity-packages: com.qzing.ddd.classic.demo
+transactional-packages: com.qzing.ddd.classic.demo
+querybean-packages: com.qzing.ddd.classic.demo

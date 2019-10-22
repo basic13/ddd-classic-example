@@ -1,0 +1,30 @@
+application:
+  product: ddd-classic
+  module: demo
+  name: demo
+  code: 8080
+  displayName: 经典DDD Demo
+
+server:
+  port: ${application.code}
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,text/javascript,text/css,application/javascript
+    min-response-size: 256
+
+spring:
+  application:
+    name: ${application.product}-${application.module}-${application.name}
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/classic-ddd?serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      auto-commit: false
+
+ebean:
+  migration:
+    run: true
