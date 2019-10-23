@@ -9,38 +9,27 @@ import java.lang.reflect.ParameterizedType;
  * @author yangyanze
  */
 @Component
-public class AppService<M, AGS extends AggService, DMS extends DomainService, PBS extends PublicService> {
+public class AppService<AGS extends AggService> {
     protected AGS aggService() {
         AGS ags = BeanFactoryProvider.getBean(getAggClass());
         assert ags != null;
         return ags;
     }
 
-    protected DMS domainService() {
-        DMS dms = BeanFactoryProvider.getBean(getDomainClass());
+    protected <DMS> DMS domainService(Class<DMS> clazz) {
+        DMS dms = BeanFactoryProvider.getBean(clazz);
         assert dms != null;
         return dms;
     }
 
-    protected PBS publicService() {
-        PBS pbs = BeanFactoryProvider.getBean(getPublicClass());
+    protected <PBS> PBS publicService(Class<PBS> clazz) {
+        PBS pbs = BeanFactoryProvider.getBean(clazz);
         assert pbs != null;
         return pbs;
     }
 
     @SuppressWarnings("unchecked")
     private Class<AGS> getAggClass() {
-        return (Class<AGS>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+        return (Class<AGS>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
-
-    @SuppressWarnings("unchecked")
-    private Class<DMS> getDomainClass() {
-        return (Class<DMS>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[2];
-    }
-
-    @SuppressWarnings("unchecked")
-    private Class<PBS> getPublicClass() {
-        return (Class<PBS>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[3];
-    }
-
 }

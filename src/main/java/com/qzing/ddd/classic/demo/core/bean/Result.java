@@ -1,6 +1,7 @@
 package com.qzing.ddd.classic.demo.core.bean;
 
 import io.ebean.Model;
+import io.ebean.PagedList;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -51,10 +52,23 @@ public class Result implements Serializable {
         PageResult rlt = new PageResult();
         rlt.setSuccess(true);
         rlt.setList(list);
-        rlt.setTotal(total);
+        rlt.setTotalCount(total);
         return rlt;
     }
 
+
+    public static PageResult success(PagedList<?> page) {
+        PageResult rlt = new PageResult();
+        rlt.setSuccess(true);
+        rlt.setList(page.getList());
+        rlt.setHasNext(page.hasNext());
+        rlt.setHasPrev(page.hasPrev());
+        rlt.setTotalCount(page.getTotalCount());
+        rlt.setTotalPageCount(page.getTotalPageCount());
+        rlt.setPageIndex(page.getPageIndex());
+        rlt.setPageSize(page.getPageSize());
+        return rlt;
+    }
 }
 
 @Data
@@ -75,5 +89,10 @@ class ModelResult extends Result {
 @EqualsAndHashCode(callSuper = true)
 class PageResult extends Result {
     private List<?> list;
-    private Integer total;
+    private Integer totalCount;
+    private Boolean hasNext;
+    private Boolean hasPrev;
+    private Integer totalPageCount;
+    private Integer pageIndex;
+    private Integer pageSize;
 }

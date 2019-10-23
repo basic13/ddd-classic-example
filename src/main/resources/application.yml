@@ -4,6 +4,7 @@ application:
   name: demo
   code: 8080
   displayName: 经典DDD Demo
+  basepackage: com.qzing.ddd.classic.demo.domain
 
 server:
   port: ${application.code}

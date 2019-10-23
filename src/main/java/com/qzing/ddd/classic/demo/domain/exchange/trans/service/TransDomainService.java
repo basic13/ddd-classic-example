@@ -13,12 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class TransDomainService extends DomainService {
     private static AccountAggService accountAggService = aggService(AccountAggService.class);
-    private static TransRecordAggService transRecordAppService = aggService(TransRecordAggService.class);
+    private static TransRecordAggService transRecordAggService = aggService(TransRecordAggService.class);
 
     @Transactional(rollbackFor = Exception.class)
     public TransResultVo trans(TransDto transCmd) {
         TransResultVo transRlt = accountAggService.trans(transCmd);
-        transRecordAppService.create(transCmd, transRlt);
+        transRecordAggService.create(transCmd, transRlt);
         return transRlt;
     }
+
 }

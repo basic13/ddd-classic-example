@@ -1,8 +1,6 @@
 package com.qzing.ddd.classic.demo.domain.exchange.account.model;
 
-import com.qzing.ddd.classic.demo.core.exception.BizException;
 import com.qzing.ddd.classic.demo.core.model.BaseModel;
-import com.qzing.ddd.classic.demo.domain.exchange.account.model.query.QAccount;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -40,28 +38,4 @@ public class Account extends BaseModel {
      */
     @Column(length = 50)
     private String cardno;
-
-    public static Account findById(String gid) {
-        Account account = new QAccount().gid.eq(gid).findOne();
-        assert account != null;
-        return account;
-    }
-
-    public static Account findByNameAndCard(String targetName, String targetCard) {
-        Account account = new QAccount().name.eq(targetName).cardno.eq(targetCard).findOne();
-        return account;
-    }
-
-    public Account increaseBalance(BigDecimal amount) {
-        setBalance(balance.add(amount));
-        return this;
-    }
-
-    public Account deductBalance(BigDecimal amount) {
-        if (balance.compareTo(amount) < 0) {
-            throw new BizException("扣款失败：余额不足");
-        }
-        setBalance(balance.subtract(amount));
-        return this;
-    }
 }
