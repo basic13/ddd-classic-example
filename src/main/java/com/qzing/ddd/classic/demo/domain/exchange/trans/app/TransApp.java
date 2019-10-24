@@ -40,4 +40,12 @@ public class TransApp extends AppService<TransRecordAggService> {
     public Result pageQuery2(@RequestBody Page page) {
         return Result.success(transRecordAggService.pageQuery2(page), 0);
     }
+
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public Result test(){
+        transRecordAggService.test();
+        return Result.success();
+    }
 }

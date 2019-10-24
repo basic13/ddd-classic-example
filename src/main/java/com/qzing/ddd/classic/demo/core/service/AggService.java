@@ -2,6 +2,7 @@ package com.qzing.ddd.classic.demo.core.service;
 
 import com.jfinal.template.Engine;
 import com.qzing.ddd.classic.demo.core.exception.BizException;
+import com.qzing.ddd.classic.demo.core.inspect.ServiceCodeInspect;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -15,7 +16,7 @@ import java.util.Map;
 /**
  * @author yangyanze
  */
-public class AggService extends BaseService {
+public class AggService extends ServiceCodeInspect {
     @Value("${application.basepackage}")
     private String basePkg;
 

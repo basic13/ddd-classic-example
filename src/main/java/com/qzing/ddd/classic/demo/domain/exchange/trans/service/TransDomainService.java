@@ -21,5 +21,4 @@ public class TransDomainService extends DomainService {
         transRecordAggService.create(transCmd, transRlt);
         return transRlt;
     }
-
 }

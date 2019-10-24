@@ -20,6 +20,11 @@ import java.util.List;
 @Component
 public class TransRecordAggService extends AggService {
     private EntityService<TransRecord, QTransRecord> transRecordEntityService = EntityService.of(TransRecord.class, QTransRecord.class);
+    private final TestDomainService testDomainService;
+
+    public TransRecordAggService(TestDomainService testDomainService) {
+        this.testDomainService = testDomainService;
+    }
 
     public void create(TransDto transCmd, TransResultVo transRlt) {
         TransRecord record = new TransRecord();
@@ -41,5 +46,9 @@ public class TransRecordAggService extends AggService {
                 put("xm", "张三");
             }
         })));
+    }
+
+    public void test() {
+        testDomainService.test();
     }
 }

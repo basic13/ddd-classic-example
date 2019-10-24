@@ -5,6 +5,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -20,7 +21,6 @@ import java.util.Set;
 @Component
 @Slf4j
 public class ValidateAspect {
-
     @Pointcut("execution(public * com.qzing.ddd..app..*(..))")
     public void controller() {
     }
