@@ -1,9 +1,9 @@
 package com.qzing.ddd.classic.demo.core.service;
 
 import com.qzing.ddd.classic.demo.core.bean.Page;
+import com.qzing.ddd.classic.demo.core.bean.Result;
 import com.qzing.ddd.classic.demo.core.model.BaseModel;
 import io.ebean.DB;
-import io.ebean.PagedList;
 import io.ebean.typequery.TQRootBean;
 
 import java.util.List;
@@ -43,11 +43,11 @@ public class EntityService<M extends BaseModel, QM extends TQRootBean<M, QM>> {
         return DB.findDto(clazz, sql).findList();
     }
 
-    public PagedList<M> pageQuery(Page page) {
+    public Result pageQuery(Page page) {
         QM query = getQuery();
         query.setMaxRows(page.getSize());
         query.setFirstRow(page.getFirstRow());
-        return query.findPagedList();
+        return Result.success(query.findPagedList());
     }
 
     public M findById(Object id) {

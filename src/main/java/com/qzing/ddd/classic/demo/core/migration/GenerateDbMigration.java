@@ -11,7 +11,8 @@ public class GenerateDbMigration {
         DbMigration dbMigration = DbMigration.create();
         dbMigration.setPlatform(Platform.MYSQL);
 
-        dbMigration.generateMigration();
+        String sop = dbMigration.generateMigration();
+        System.out.println(sop);
     }
 
 }

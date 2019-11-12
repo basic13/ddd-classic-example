@@ -43,11 +43,11 @@ public class ServiceCodeInspect {
     }
 
 
-    public static List<Object> buildStack(JoinPoint joinPoint) {
+    protected static List<Object> buildStack(JoinPoint joinPoint) {
         return doBuildStack(inCheckList(joinPoint.getSignature().getDeclaringType()) ? joinPoint : null);
     }
 
-    public static List<Object> buildStack() {
+    protected static List<Object> buildStack() {
         return doBuildStack(null);
     }
 
@@ -68,7 +68,7 @@ public class ServiceCodeInspect {
     }
 
 
-    public static String getSimpleName(String orignal) {
+    protected static String getSimpleName(String orignal) {
         orignal = orignal.replace(BASE_PKG, "");
         if (orignal.startsWith(".")) {
             orignal = orignal.substring(1);
@@ -78,6 +78,10 @@ public class ServiceCodeInspect {
 
     public static void check() {
         check(buildStack());
+    }
+
+    public static void check(JoinPoint jp) {
+        check(buildStack(jp));
     }
 
     public static void check(List<Object> stack) {

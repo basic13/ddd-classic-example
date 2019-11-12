@@ -1,6 +1,7 @@
 package com.qzing.ddd.classic.demo.domain.exchange.trans.service;
 
 import com.qzing.ddd.classic.demo.core.bean.Page;
+import com.qzing.ddd.classic.demo.core.bean.Result;
 import com.qzing.ddd.classic.demo.core.service.AggService;
 import com.qzing.ddd.classic.demo.core.service.EntityService;
 import com.qzing.ddd.classic.demo.domain.exchange.account.vo.TransResultVo;
@@ -8,7 +9,6 @@ import com.qzing.ddd.classic.demo.domain.exchange.trans.dto.TransDto;
 import com.qzing.ddd.classic.demo.domain.exchange.trans.model.TransRecord;
 import com.qzing.ddd.classic.demo.domain.exchange.trans.model.query.QTransRecord;
 import com.qzing.ddd.classic.demo.domain.exchange.trans.vo.TransRecordVo;
-import io.ebean.PagedList;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class TransRecordAggService extends AggService {
         transRecordEntityService.save(record);
     }
 
-    public PagedList<TransRecord> pageQuery(Page page) {
+    public Result pageQuery(Page page) {
         return transRecordEntityService.pageQuery(page);
     }
 

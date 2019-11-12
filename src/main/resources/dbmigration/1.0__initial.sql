@@ -2,6 +2,7 @@
 create table account (
   gid                           varchar(32) not null,
   name                          varchar(50),
+  gender                        varchar(2),
   balance                       decimal(65,2),
   idcard                        varchar(18),
   cardno                        varchar(50),
@@ -26,4 +27,10 @@ create table trans_record (
   modify_by                     varchar(50) not null,
   constraint pk_trans_record primary key (gid)
 );
+
+create index ix_trans_record_source_gid on trans_record (source_gid);
+alter table trans_record add constraint fk_trans_record_source_gid foreign key (source_gid) references account (gid) on delete restrict on update restrict;
+
+create index ix_trans_record_target_gid on trans_record (target_gid);
+alter table trans_record add constraint fk_trans_record_target_gid foreign key (target_gid) references account (gid) on delete restrict on update restrict;
 

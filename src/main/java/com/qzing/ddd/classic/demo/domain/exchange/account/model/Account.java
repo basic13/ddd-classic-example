@@ -22,6 +22,9 @@ public class Account extends BaseModel {
      */
     @Column(length = 50)
     private String name;
+
+    @Column(length = 2)
+    private String gender;
     /**
      * 余额
      */

@@ -4,6 +4,7 @@
         <createTable name="account" identityType="external" pkName="pk_account">
             <column name="gid" type="varchar(32)" primaryKey="true" identity="true"/>
             <column name="name" type="varchar(50)"/>
+            <column name="gender" type="varchar(2)"/>
             <column name="balance" type="decimal(65,2)"/>
             <column name="idcard" type="varchar(18)"/>
             <column name="cardno" type="varchar(50)"/>
@@ -15,8 +16,8 @@
         <createTable name="trans_record" identityType="external" pkName="pk_trans_record">
             <column name="gid" type="varchar(32)" primaryKey="true" identity="true"/>
             <column name="trade_no" type="varchar(50)"/>
-            <column name="source_gid" type="varchar(32)"/>
-            <column name="target_gid" type="varchar(32)"/>
+            <column name="source_gid" type="varchar(32)" references="account.gid" foreignKeyName="fk_trans_record_source_gid" foreignKeyIndex="ix_trans_record_source_gid"/>
+            <column name="target_gid" type="varchar(32)" references="account.gid" foreignKeyName="fk_trans_record_target_gid" foreignKeyIndex="ix_trans_record_target_gid"/>
             <column name="amount" type="decimal(65,2)"/>
             <column name="status" type="integer(10)" checkConstraint="check ( status in (0,1))" checkConstraintName="ck_trans_record_status"/>
             <column name="remark" type="varchar(50)"/>

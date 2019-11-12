@@ -53,7 +53,7 @@ public class BaseModel extends Model {
     }
 
     private void check() {
-        ServiceCodeInspect.check(ServiceCodeInspect.buildStack());
+        ServiceCodeInspect.check();
     }
 
 }

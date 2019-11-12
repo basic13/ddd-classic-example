@@ -5,7 +5,10 @@ import io.ebean.PagedList;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.List;
 
 /**
@@ -41,6 +44,20 @@ public class Result implements Serializable {
         return rlt;
     }
 
+    public static Result fail(Throwable throwable) {
+        ExceptionResult rlt = new ExceptionResult();
+        rlt.setSuccess(false);
+        rlt.setMessage(throwable.getMessage());
+        try (StringWriter sw = new StringWriter();
+             PrintWriter pw = new PrintWriter(sw);) {
+            throwable.printStackTrace(pw);
+            rlt.setData(sw.toString());
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return rlt;
+    }
+
     public static ModelResult success(Model model) {
         ModelResult rlt = new ModelResult();
         rlt.setSuccess(true);
@@ -69,12 +86,26 @@ public class Result implements Serializable {
         rlt.setPageSize(page.getPageSize());
         return rlt;
     }
+
+    public static ObjectResult success(Object obj) {
+        ObjectResult rlt = new ObjectResult();
+        rlt.setSuccess(true);
+        rlt.setData(obj);
+        return rlt;
+    }
 }
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 class MessageResult extends Result {
     private String message;
+}
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+class ExceptionResult extends Result {
+    private String message;
+    private Object data;
 }
 
 
@@ -84,6 +115,12 @@ class ModelResult extends Result {
     private Model model;
 }
 
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+class ObjectResult extends Result {
+    private Object data;
+}
 
 @Data
 @EqualsAndHashCode(callSuper = true)

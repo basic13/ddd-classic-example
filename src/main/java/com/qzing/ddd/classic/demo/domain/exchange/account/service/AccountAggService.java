@@ -1,6 +1,7 @@
 package com.qzing.ddd.classic.demo.domain.exchange.account.service;
 
 import com.qzing.ddd.classic.demo.core.bean.Page;
+import com.qzing.ddd.classic.demo.core.bean.Result;
 import com.qzing.ddd.classic.demo.core.exception.BizException;
 import com.qzing.ddd.classic.demo.core.service.AggService;
 import com.qzing.ddd.classic.demo.core.service.EntityService;
@@ -9,7 +10,6 @@ import com.qzing.ddd.classic.demo.domain.exchange.account.model.Account;
 import com.qzing.ddd.classic.demo.domain.exchange.account.model.query.QAccount;
 import com.qzing.ddd.classic.demo.domain.exchange.account.vo.TransResultVo;
 import com.qzing.ddd.classic.demo.domain.exchange.trans.dto.TransDto;
-import io.ebean.PagedList;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class AccountAggService extends AggService {
     /**
      * 分页查询
      */
-    public PagedList<Account> pageQuery(Page page) {
+    public Result pageQuery(Page page) {
         return accountEntityService.pageQuery(page);
     }
 
