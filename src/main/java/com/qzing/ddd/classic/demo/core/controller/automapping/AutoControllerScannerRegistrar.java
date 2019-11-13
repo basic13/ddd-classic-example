@@ -1,4 +1,4 @@
-package com.qzing.ddd.classic.demo.core.controller;
+package com.qzing.ddd.classic.demo.core.controller.automapping;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

@@ -1,7 +1,7 @@
 package com.qzing.ddd.classic.demo.core.controller;
 
-import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.lang.annotation.*;
@@ -17,6 +17,13 @@ import java.lang.annotation.*;
 public @interface AppController {
     String app() default "";
 
-    @AliasFor(annotation = Component.class)
     String value() default "";
+
+    RequestMethod[] method() default {};
+
+    boolean restful() default false;
+
+    int priority() default 0;
+
+    String ENDFIX = "AppService";
 }

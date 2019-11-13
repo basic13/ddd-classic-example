@@ -1,6 +1,7 @@
 package com.qzing.ddd.classic.demo.core.controller;
 
-import com.qzing.ddd.classic.demo.core.controller.request.RequestBodyValidateAdvice;
+import com.qzing.ddd.classic.demo.core.controller.automapping.AutoControllerScannerRegistrar;
+import com.qzing.ddd.classic.demo.core.controller.request.ValidateRequestBodyAdvice;
 import com.qzing.ddd.classic.demo.core.controller.response.ExceptionResponseHandler;
 import com.qzing.ddd.classic.demo.core.controller.response.NormalResponseAdvice;
 import org.springframework.context.annotation.Import;
@@ -14,11 +15,10 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Documented
 @Import({
-        Test.class,
         AutoControllerScannerRegistrar.class,
         NormalResponseAdvice.class,
         ExceptionResponseHandler.class,
-        RequestBodyValidateAdvice.class
+        ValidateRequestBodyAdvice.class
 })
-public @interface EnableDddClassic {
+public @interface EnableControllerEnhancement {
 }

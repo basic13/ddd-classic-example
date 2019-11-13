@@ -11,7 +11,6 @@ import com.qzing.ddd.classic.demo.domain.exchange.trans.model.query.QTransRecord
 import com.qzing.ddd.classic.demo.domain.exchange.trans.vo.TransRecordVo;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -41,11 +40,7 @@ public class TransRecordAggService extends AggService {
     }
 
     public List<TransRecordVo> pageQuery2(Page page) {
-        return transRecordEntityService.find(TransRecordVo.class, (getSql("transPageQuery", new HashMap<String, Object>(1) {
-            {
-                put("xm", "张三");
-            }
-        })));
+        return null;
     }
 
     public void test() {

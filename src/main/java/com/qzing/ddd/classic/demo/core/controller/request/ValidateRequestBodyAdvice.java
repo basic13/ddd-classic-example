@@ -15,10 +15,12 @@ import java.lang.reflect.Type;
 import java.util.Set;
 
 /**
+ * 自动校验请求体
+ *
  * @author yangyanze
  */
 @ControllerAdvice
-public class RequestBodyValidateAdvice extends RequestBodyAdviceAdapter {
+public class ValidateRequestBodyAdvice extends RequestBodyAdviceAdapter {
     @Override
     public boolean supports(MethodParameter methodParameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
         Method method = methodParameter.getMethod();

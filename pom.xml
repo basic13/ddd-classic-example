@@ -150,7 +150,7 @@
             <version>28.1-jre</version>
         </dependency>
 
-        <dependency>
+   <!--     <dependency>
             <groupId>org.apache.ignite</groupId>
             <artifactId>ignite-core</artifactId>
             <version>${ignite.version}</version>
@@ -164,7 +164,7 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.197</version>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 

@@ -1,11 +1,8 @@
 package com.qzing.ddd.classic.demo.core.kit;
 
+import com.google.common.base.CaseFormat;
 import org.apache.commons.lang3.StringUtils;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.List;
@@ -16,7 +13,22 @@ import java.util.Locale;
  */
 public class StrKit {
     private StrKit() {
+    }
 
+    public static String camelToUnderLine(String in) {
+        return CaseFormat.UPPER_CAMEL.converterTo(CaseFormat.LOWER_UNDERSCORE).convert(in);
+    }
+
+    public static String underLineToCamel(String in) {
+        return CaseFormat.LOWER_UNDERSCORE.converterTo(CaseFormat.LOWER_CAMEL).convert(in);
+    }
+
+    public static String camelToHyphen(String in) {
+        return CaseFormat.UPPER_CAMEL.converterTo(CaseFormat.LOWER_HYPHEN).convert(in);
+    }
+
+    public static String hyphenToCamel(String in) {
+        return CaseFormat.LOWER_HYPHEN.converterTo(CaseFormat.LOWER_CAMEL).convert(in);
     }
 
     public static String remove(String str, String remove) {
@@ -862,82 +874,4 @@ public class StrKit {
     public static String rightPad(String arg0, int arg1, String arg2) {
         return StringUtils.rightPad(arg0, arg1, arg2);
     }
-
-
-    public static void main(String[] args) {
-        Class<StringUtils> stringUtilsClass = StringUtils.class;
-
-
-        Method[] ms = stringUtilsClass.getMethods();
-        for (Method m : ms) {
-            Annotation[] mda = m.getDeclaredAnnotations();
-            boolean rt = false;
-            for (Annotation annotation : mda) {
-                if (annotation.annotationType() == Deprecated.class) {
-                    rt = true;
-                    break;
-                }
-            }
-            if (rt) {
-                continue;
-            }
-            StringBuilder sb = new StringBuilder();
-            int mf = m.getModifiers();
-            boolean dft = m.isDefault();
-            printModifiersIfNonzero(sb, mf, dft);
-            if (!sb.toString().contains(" static ")) {
-                continue;
-            }
-            sb.append(m.getReturnType().getSimpleName()).append(" ");
-            sb.append(m.getName()).append("(");
-            boolean first = true;
-            for (Parameter p : m.getParameters()) {
-                if (first) {
-                    first = false;
-                } else {
-                    sb.append(",");
-                }
-                sb.append(p.getType().getSimpleName()).append(" ").append(p.getName());
-            }
-            sb.append("){\n");
-            sb.append("return StringUtils.").append(m.getName()).append("(");
-            first = true;
-            for (Parameter p : m.getParameters()) {
-                if (first) {
-                    first = false;
-                } else {
-                    sb.append(",");
-                }
-                sb.append(p.getName());
-            }
-            sb.append(");");
-            sb.append("\n}");
-
-            System.out.println(sb);
-        }
-    }
-
-    static final int ACCESS_MODIFIERS =
-            Modifier.PUBLIC | Modifier.PROTECTED | Modifier.PRIVATE;
-
-    static void printModifiersIfNonzero(StringBuilder sb, int mf, boolean isDefault) {
-        int mod = mf & Modifier.methodModifiers();
-
-        if (mod != 0 && !isDefault) {
-            sb.append(Modifier.toString(mod)).append(' ');
-        } else {
-            int access_mod = mod & ACCESS_MODIFIERS;
-            if (access_mod != 0) {
-                sb.append(Modifier.toString(access_mod)).append(' ');
-            }
-            if (isDefault) {
-                sb.append("default ");
-            }
-            mod = (mod & ~ACCESS_MODIFIERS);
-            if (mod != 0) {
-                sb.append(Modifier.toString(mod)).append(' ');
-            }
-        }
-    }
-
 }

@@ -1,5 +1,6 @@
-package com.qzing.ddd.classic.demo.core.controller;
+package com.qzing.ddd.classic.demo.core.controller.automapping;
 
+import com.qzing.ddd.classic.demo.core.controller.AppController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.env.Environment;
@@ -130,8 +131,7 @@ public class AutoControllerScanner implements EnvironmentCapable, ResourceLoader
         for (MetadataReader readers : metadataReaders) {
             try {
                 Class<?> type = ClassUtils.forName(readers.getClassMetadata().getClassName(), ClassUtils.getDefaultClassLoader());
-                AutoControllerMetadataManager.addAutoController(type);
-                System.err.println(type);
+                AutoControllerMetadataManager.AUTOCONTROLLER_TYPES.add(type);
             } catch (ClassNotFoundException e) {
                 log.error("ClassNotFoundException", e);
             }

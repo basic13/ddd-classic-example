@@ -1,6 +1,7 @@
 package com.qzing.ddd.classic.demo.core.service;
 
 import com.qzing.ddd.classic.demo.core.config.BeanFactoryProvider;
+import com.qzing.ddd.classic.demo.core.service.async.AsyncTask;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.ParameterizedType;
@@ -31,5 +32,16 @@ public class AppService<AGS extends AggService> {
     @SuppressWarnings("unchecked")
     private Class<AGS> getAggClass() {
         return (Class<AGS>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    }
+
+    protected void exec(AsyncTask runnable) {
+        Thread t = new Thread(() -> {
+            try {
+                runnable.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        t.start();
     }
 }
