@@ -6,14 +6,15 @@ import com.qzing.ddd.classic.demo.core.service.AppService;
 import com.qzing.ddd.classic.demo.domain.exchange.account.dto.*;
 import com.qzing.ddd.classic.demo.domain.exchange.account.model.Account;
 import com.qzing.ddd.classic.demo.domain.exchange.account.service.AccountAggService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author yangyanze
- */
+
+@Api(tags = "账户管理服务")
 @RestController
 @RequestMapping("/account")
 public class AccountAppService extends AppService<AccountAggService> {
@@ -22,7 +23,8 @@ public class AccountAppService extends AppService<AccountAggService> {
     /**
      * 分页查询
      */
-    @RequestMapping("/pageQuery")
+    @ApiOperation(value = "分页查询",httpMethod = "GET")
+    @RequestMapping("/page-query")
     @ResponseBody
     public Result pageQuery(@RequestBody Page page) {
         return aggService.pageQuery(page);

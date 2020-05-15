@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * 二次开发
- *
- * @author yangyanze
  */
 @AppController(value = "auto-ctrl", priority = 1)
 public class SecondAutoCtrlAppService extends AppService {

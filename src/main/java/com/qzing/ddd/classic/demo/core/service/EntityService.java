@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author yangyanze
  */
-public class EntityService<M extends BaseModel, QM extends TQRootBean<M, QM>> {
+public final class EntityService<M extends BaseModel, QM extends TQRootBean<M, QM>> {
 
     private Class<M> modelClass;
     private Class<QM> modelQueryClass;

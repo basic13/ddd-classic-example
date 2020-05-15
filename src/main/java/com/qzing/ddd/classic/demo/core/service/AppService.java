@@ -34,6 +34,11 @@ public class AppService<AGS extends AggService> {
         return (Class<AGS>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
+    public static void main(String[] args) {
+        String a=null;
+        a.startsWith("1");
+    }
+
     protected void exec(AsyncTask runnable) {
         Thread t = new Thread(() -> {
             try {

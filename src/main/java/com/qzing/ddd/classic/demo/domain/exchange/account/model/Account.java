@@ -41,4 +41,5 @@ public class Account extends BaseModel {
      */
     @Column(length = 50)
     private String cardno;
+
 }
